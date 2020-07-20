@@ -1,7 +1,13 @@
 class PostsController < ApplicationController
 
+  #if there is an author_id rails knows to implicitly render the author_posts index
+  #rather that the posts index 
   def index
-    @posts = Post.all
+    if params[:author_id]
+      @posts = Author.find(params[:author_id]).posts 
+    else 
+      @posts = Post.all 
+    end 
   end
 
   def show
