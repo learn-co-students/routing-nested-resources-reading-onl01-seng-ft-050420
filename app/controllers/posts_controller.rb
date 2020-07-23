@@ -1,7 +1,14 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    if params[:author_id] #if the parameters of a post include an author id
+      #then the @posts variable should be set equal to an author where the params of
+      #the author id is called from posts
+      @posts = Author.find(params[:author_id]).posts #rails takes the parent resource's name and adds _id to
+      #make it predictable to find the parent resource's id
+    else
+      @posts = Post.all
+    end
   end
 
   def show
